@@ -35,7 +35,9 @@ public class HbmRun {
 
             Query query = session.createQuery("from Candidate c where c.name = :fName");
             query.setParameter("fName", "Junior Vasiliy");
-            System.out.println(query.uniqueResult());
+            for (Object cand : query.list()) {
+                System.out.println(cand);
+            }
 
             session.createQuery("update Candidate c set c.name = :newName,"
                             + " c.experience = :newExp, "
