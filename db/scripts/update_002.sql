@@ -5,5 +5,6 @@ create table if not exists brand(
 
 create table if not exists model(
                      id serial primary key,
-                     name varchar(255)
+                     name varchar(255),
+                     brand_id int references brand(id)
 );
