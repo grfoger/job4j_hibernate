@@ -23,7 +23,7 @@ public class Vacancy {
     private String title;
     private String description;
 
-    public static Vacancy of(String title, String description){
+    public static Vacancy of(String title, String description) {
         Vacancy v = new Vacancy();
         v.title = title;
         v.description = description;
