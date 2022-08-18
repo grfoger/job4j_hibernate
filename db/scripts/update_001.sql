@@ -4,6 +4,3 @@ create table cars(
                      created timestamp
 );
 
-create table candidates(
-  id serial primary key
-);

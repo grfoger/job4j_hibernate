@@ -1,19 +1,29 @@
 package ru.job4j.hql.model;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Objects;
+@Getter
+@Setter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name = "candidates")
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private int id;
 
     private String name;
-
     private int experience;
-
     private double salary;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private VacancyBase vacancyBase;
 
     public static Candidate of(String name, int experience, double salary) {
         Candidate candidate = new Candidate();
@@ -23,57 +33,4 @@ public class Candidate {
         return candidate;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public void setCity(double salary) {
-        this.salary = salary;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Candidate candidate = (Candidate) o;
-        return id == candidate.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Candidate: id=%s, name=%s, experience=%s years, salary=%s", id, name, experience, salary);
-    }
 }
